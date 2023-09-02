@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.graph_objs as go
 from flask import Flask, render_template
 from model.set_working_directory import set_working_directory
+from model.save_figure_as_json import save_figure_as_json
 
 app = Flask(__name__)
 
@@ -32,6 +33,7 @@ def create_candlestick_chart(df):
     fig = go.Figure(data=data, layout=layout)
     return fig
 
+
 @app.route('/')
 def index():
     # Path to the CSV file
@@ -40,6 +42,12 @@ def index():
     # Load stock data and create a candlestick chart
     df = load_stock_data(csv_path)
     chart = create_candlestick_chart(df)
+
+    print(chart)
+
+    json_file_path = 'figure_data.json'
+    save_figure_as_json(chart, json_file_path)
+    print(f'Plotly Figure data saved as JSON in {json_file_path}')
 
     return render_template('index.html', chart=chart)
 
