@@ -1,25 +1,51 @@
+import pandas as pd
 import plotly.graph_objs as go
 from flask import Flask, render_template
+from model.set_working_directory import set_working_directory
 
 app = Flask(__name__)
 
-# Sample data for visualization
-x_values = [1, 2, 3, 4, 5]
-y_values = [10, 15, 13, 17, 8]
+# Function to load stock data from a CSV file into a Pandas DataFrame
+def load_stock_data(csv_path):
+    df = pd.read_csv(csv_path)
+    return df
 
-# Function to create the line chart
-def create_line_chart():
-    trace = go.Scatter(x=x_values, y=y_values, mode='lines+markers')
-    data = [trace]
-    layout = go.Layout(title='Sample Line Chart', xaxis=dict(title='X-axis'), yaxis=dict(title='Y-axis'))
+# Function to create a candlestick chart from stock data
+def create_candlestick_chart(df):
+    candlestick = go.Candlestick(
+        x=df['Date'],
+        open=df['Open'],
+        high=df['High'],
+        low=df['Low'],
+        close=df['Close'],
+        increasing_line=dict(color='green'),
+        decreasing_line=dict(color='red'),
+    )
+
+    data = [candlestick]
+    layout = go.Layout(
+        title='Candlestick Chart for Stock Prices',
+        xaxis=dict(title='Date'),
+        yaxis=dict(title='Price'),
+    )
+
     fig = go.Figure(data=data, layout=layout)
-    return fig.to_html(full_html=False)
+    return fig
 
 @app.route('/')
 def index():
-    # Generate the line chart and pass it to the HTML template
-    chart = create_line_chart()
+    # Path to the CSV file
+    csv_path = 'stock_data/META.csv'
+
+    # Load stock data and create a candlestick chart
+    df = load_stock_data(csv_path)
+    chart = create_candlestick_chart(df)
+
     return render_template('index.html', chart=chart)
 
 if __name__ == '__main__':
+    # Set the working directory
+    set_working_directory('/workspaces/AutoTraderX')
+    
+    # Run the Flask application
     app.run(debug=True)
