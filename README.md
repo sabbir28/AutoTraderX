@@ -1,5 +1,5 @@
 # AutoTraderX
-"Trade smarter with AutoTraderX – AI-powered automated trading for profit and efficiency. Get started now!"
+Trade smarter with AutoTraderX – AI-powered automated trading for profit and efficiency. Get started now!
 ## Overview
 
 AutoTraderX is an innovative automated trading platform that harnesses the power of neural AI to execute trades intelligently and efficiently. This README file serves as a guide to help users understand and use the application effectively.
