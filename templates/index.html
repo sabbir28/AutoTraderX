@@ -3,19 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candlestick Chart for Stock Prices</title>
-    <!-- Include the Plotly.js library -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Facebook Share Price Visualization</title>
 </head>
 <body>
-    <h1>Candlestick Chart for Stock Prices</h1>
-    <!-- Create a div element for the chart -->
-    <div id="chartDiv"></div>
-
-    <script>
-        // Render the Plotly chart in the 'chartDiv' div element
-        var chartData = {{ chart | safe }};
-        Plotly.newPlot('chartDiv', chartData);
-    </script>
+    <h1>Facebook Share Price Over Time</h1>
+    {{ chart | safe }}
 </body>
 </html>
