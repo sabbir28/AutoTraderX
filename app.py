@@ -54,10 +54,9 @@ def create_candlestick_chart(df):
 
 @app.route('/')
 def index():
-    csv_path = 'stock_data/META.csv'
+    csv_path = 'stock_data/FB_FirstRateDatacom1.csv'
     df = load_stock_data(csv_path)
     chart = create_candlestick_chart(df)
-    print(chart)
     return render_template('index.html', chart=chart)
 
 if __name__ == '__main__':
