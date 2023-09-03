@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.graph_objs as go
 from flask import Flask, render_template
 from model.set_working_directory import set_working_directory
+from model.Graph.signal_generator import signal_generator
 
 app = Flask(__name__)
 
